@@ -1,0 +1,57 @@
+workspace(name = "onos")
+
+load("@bazel_tools//tools/build_defs/repo:http.bzl", "http_archive")
+
+# ========== Node.js Rules ==========
+RULES_NODEJS_VERSION = "5.7.0"
+RULES_NODEJS_SHA256 = "b3521b29c7cb0c47a1a735cce7e7e811a4f80d8e3720cf3a1b624533e4bb7cb6"
+
+http_archive(
+    name = "rules_nodejs",
+    sha256 = RULES_NODEJS_SHA256,
+    urls = [
+        "https://github.com/bazelbuild/rules_nodejs/releases/download/%s/rules_nodejs-%s.tar.gz" % (RULES_NODEJS_VERSION, RULES_NODEJS_VERSION),
+    ],
+)
+
+load("@rules_nodejs//nodejs:repositories.bzl", "node_repositories")
+load("@rules_nodejs//:package_json.bzl", "npm_install", "yarn_install")
+
+node_repositories(package_json = ["//web/gui2:package.json", "//tools/gui:package.json"])
+
+yarn_install(
+    name = "npm",
+    package_json = "//web/gui2:package.json",
+    yarn_lock = "//web/gui2:yarn.lock",
+    use_global_yarn_cache = True,
+)
+
+npm_install(
+    name = "gui1_npm",
+    package_json = "//tools/gui:package.json",
+    package_lock_json = "//tools/gui:package-lock.json",
+)
+
+# ========== Java Rules ==========
+http_archive(
+    name = "rules_jvm_external",
+    sha256 = "31556dd1b130e4b81e6a0ff3eb08901de7c3db1e9435cc0cb3b6b9845aa36126",
+    strip_prefix = "rules_jvm_external-4.2",
+    url = "https://github.com/bazelbuild/rules_jvm_external/archive/4.2.zip",
+)
+
+load("@rules_jvm_external//:defs.bzl", "maven_install")
+
+maven_install(
+    name = "maven",
+    artifacts = [
+        "com.google.guava:guava:30.1.1-jre",
+        # Add any other Maven dependencies here...
+    ],
+    repositories = [
+        "https://repo1.maven.org/maven2",
+    ],
+)
+
+# ========== Other Dependencies (Example) ==========
+# Add any additional dependencies used by ONOS or your custom Bazel rules
