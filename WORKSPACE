@@ -134,28 +134,11 @@ load("//tools/build/bazel:topo_workspace.bzl", "generate_topo_device")
 
 generate_topo_device()
 
-#load("@bazel_tools//tools/build_defs/repo:http.bzl", "http_archive")
-
 http_archive(
     name = "build_bazel_rules_nodejs",
-    urls = ["https://github.com/bazelbuild/rules_nodejs/releases/download/5.7.0/rules_nodejs-5.7.0.tar.gz"],
-    sha256 = "2c8460ac7b50967de982a4ad7b30e2766a774cf27d3d7c5beee96c5f374e274c"
+    urls = ["https://github.com/bazelbuild/rules_nodejs/releases/download/2.3.2/rules_nodejs-2.3.2.tar.gz"],
+    sha256 = "c29944ba9b0b430aadcaf3bf2570fece6fc5ebfb76df145c6cdad40d65c20811"
 )
-
-load("@build_bazel_rules_nodejs//:repositories.bzl", #"nodejs_register_toolchains")
-
-nodejs_register_toolchains(
-	name = "nodejs",
-	node_version = "system",
-)
-
-#http_archive(
-#    name = "build_bazel_rules_nodejs",
-#    sha256 = RULES_NODEJS_SHA256,
-#    urls = [
-#        "https://github.com/bazelbuild/rules_nodejs/releases/download/%s/rules_nodejs-%s.tar.gz" % (RULES_NODEJS_VERSION, RULES_NODEJS_VERSION),
-#    ],
-#)
 
 # Rules for compiling sass
 RULES_SASS_VERSION = "1.25.0"
@@ -268,4 +251,3 @@ http_archive(
     strip_prefix = "buildtools-" + BUILDTOOLS_VERSION,
     url = "https://github.com/bazelbuild/buildtools/archive/%s.zip" % BUILDTOOLS_VERSION,
 )
-
