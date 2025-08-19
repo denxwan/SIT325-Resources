@@ -138,8 +138,15 @@ generate_topo_device()
 
 http_archive(
     name = "build_bazel_rules_nodejs",
-    urls = ["https://github.com/bazelbuild/rules_nodejs/releases/download/5.7.0/rules_nodejs-2.3.2.tar.gz"],
-    sha256 = "c29944ba9b0b430aadcaf3bf2570fece6fc5ebfb76df145c6cdad40d65c20811"
+    urls = ["https://github.com/bazelbuild/rules_nodejs/releases/download/5.7.0/rules_nodejs-5.7.0.tar.gz"],
+    sha256 = "2c8460ac7b50967de982a4ad7b30e2766a774cf27d3d7c5beee96c5f374e274c"
+)
+
+load("@build_bazel_rules_nodejs//:repositories.bzl", #"nodejs_register_toolchains")
+
+nodejs_register_toolchains(
+	name = "nodejs",
+	node_version = "system",
 )
 
 #http_archive(
@@ -169,15 +176,15 @@ load("@build_bazel_rules_nodejs//:index.bzl", "node_repositories", "npm_install"
 
 # Setup the Node repositories. We need a NodeJS version that is more recent than v10.15.0
 # because "selenium-webdriver" which is required for "ng e2e" cannot be installed.
-node_repositories(
-    node_repositories = {
-        "10.16.0-linux_arm64": ("node-v10.16.0-linux-arm64.tar.gz", "node-v10.16.0-linux-arm64", "2d84a777318bc95dd2a201ab8d700aea7e20641b3ece0c048399398dc645cbd7"),
-        "10.16.0-darwin_amd64": ("node-v10.16.0-darwin-x64.tar.gz", "node-v10.16.0-darwin-x64", "6c009df1b724026d84ae9a838c5b382662e30f6c5563a0995532f2bece39fa9c"),
-        "10.16.0-linux_amd64": ("node-v10.16.0-linux-x64.tar.xz", "node-v10.16.0-linux-x64", "1827f5b99084740234de0c506f4dd2202a696ed60f76059696747c34339b9d48"),
-        "10.16.0-windows_amd64": ("node-v10.16.0-win-x64.zip", "node-v10.16.0-win-x64", "aa22cb357f0fb54ccbc06b19b60e37eefea5d7dd9940912675d3ed988bf9a059"),
-    },
-    node_version = "10.16.0",
-)
+#node_repositories(
+#   node_repositories = {
+#        "10.16.0-linux_arm64": ("node-v10.16.0-linux-arm64.tar.gz", "node-v10.16.0-linux-arm64", "2d84a777318bc95dd2a201ab8d700aea7e20641b3ece0c048399398dc645cbd7"),
+#        "10.16.0-darwin_amd64": ("node-v10.16.0-darwin-x64.tar.gz", "node-v10.16.0-darwin-x64", "6c009df1b724026d84ae9a838c5b382662e30f6c5563a0995532f2bece39fa9c"),
+#        "10.16.0-linux_amd64": ("node-v10.16.0-linux-x64.tar.xz", "node-v10.16.0-linux-x64", "1827f5b99084740234de0c506f4dd2202a696ed60f76059696747c34339b9d48"),
+#        "10.16.0-windows_amd64": ("node-v10.16.0-win-x64.zip", "node-v10.16.0-win-x64", "aa22cb357f0fb54ccbc06b19b60e37eefea5d7dd9940912675d3ed988bf9a059"),
+#    },
+#    node_version = "10.16.0",
+#)
 
 # TODO give this a name like `gui2_npm` once the @bazel/karma tools can tolerate a name other than `npm`
 yarn_install(
@@ -261,12 +268,4 @@ http_archive(
     strip_prefix = "buildtools-" + BUILDTOOLS_VERSION,
     url = "https://github.com/bazelbuild/buildtools/archive/%s.zip" % BUILDTOOLS_VERSION,
 )
-
-
-#load("@build_bazel_rules_nodejs//:repositories.bzl", #"nodejs_register_toolchains")
-
-#nodejs_register_toolchains(
-#	name = "nodejs",
-#	node_version = "system",
-#)
 
