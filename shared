@@ -1,0 +1,81 @@
+ERROR: /home/denxwan/onos/web/gui/BUILD:98:8: Executing genrule //web/gui:_onos-gui-npm-install failed: (Exit 1): linux-sandbox failed: error executing command 
+  (cd /home/denxwan/.cache/bazel/_bazel_denxwan/ad284d56aa212fb95e17a889fbcf6cea/sandbox/linux-sandbox/2357/execroot/org_onosproject_onos && \
+  exec env - \
+    PATH=/bin:/usr/bin:/usr/local/bin \
+    TMPDIR=/tmp \
+  /home/denxwan/.cache/bazel/_bazel_denxwan/install/5620740890d29896918ae35106336adb/linux-sandbox -t 15 -w /home/denxwan/.cache/bazel/_bazel_denxwan/ad284d56aa212fb95e17a889fbcf6cea/sandbox/linux-sandbox/2357/execroot/org_onosproject_onos -w /tmp -w /dev/shm -D -- /bin/bash -c 'source external/bazel_tools/tools/genrule/genrule-setup.sh; echo '\''if [[ "external/remotejdk11_linux_aarch64" = /* ]]; then JHOME=external/remotejdk11_linux_aarch64; else JHOME=$PWD/external/remotejdk11_linux_aarch64; fi'\'' > jdk_genrule_setup.sh; echo '\''export PATH=$JHOME/bin:$PATH:'\'' >> jdk_genrule_setup.sh; source jdk_genrule_setup.sh;  ROOT=`pwd` && export HOME=. && export XDG_CONFIG_HOME=bazel-out/aarch64-fastbuild/bin/web/gui/config && export BABEL_DISABLE_CACHE=1 && if [[ ! -z ${HTTP_PROXY-} ]]; then NPM_ARGS="--proxy $HTTP_PROXY --without-ssl --insecure"; else NPM_ARGS=""; fi && NPM=$ROOT/external/nodejs_linux_arm64/bin/npm && mkdir -p tools/gui && cd tools/gui && jar xf ../../bazel-out/aarch64-fastbuild/bin/tools/gui/tools-gui-gulp.jar && $NPM $NPM_ARGS install  --no-cache --loglevel=error > $ROOT/bazel-out/aarch64-fastbuild/bin/web/gui/onos-gui1-npm-install.log 2>&1 && find . -name package.json | while read pjson; do egrep -v '\''/execroot/'\'' $pjson > ptmp; mv ptmp $pjson; done && find package.json gulpfile.babel.js node_modules gulp-tasks -type f -exec touch -t 202101010000 {} \; && jar Mcf $ROOT/bazel-out/aarch64-fastbuild/bin/web/gui/onos-gui-npm-install.jar package.json gulpfile.babel.js node_modules gulp-tasks && touch $ROOT/bazel-out/aarch64-fastbuild/bin/web/gui/onos-gui1-npm-install.log')
+1756132381.638131126: src/main/tools/linux-sandbox.cc:152: calling pipe(2)...
+1756132381.638197376: src/main/tools/linux-sandbox.cc:171: calling clone(2)...
+1756132381.640253781: src/main/tools/linux-sandbox.cc:180: linux-sandbox-pid1 has PID 44339
+1756132381.640327990: src/main/tools/linux-sandbox-pid1.cc:641: Pid1Main started
+1756132381.640425825: src/main/tools/linux-sandbox.cc:197: done manipulating pipes
+1756132381.640518201: src/main/tools/linux-sandbox-pid1.cc:260: working dir: /home/denxwan/.cache/bazel/_bazel_denxwan/ad284d56aa212fb95e17a889fbcf6cea/sandbox/linux-sandbox/2357/execroot/org_onosproject_onos
+1756132381.640580494: src/main/tools/linux-sandbox-pid1.cc:292: writable: /home/denxwan/.cache/bazel/_bazel_denxwan/ad284d56aa212fb95e17a889fbcf6cea/sandbox/linux-sandbox/2357/execroot/org_onosproject_onos
+1756132381.640588035: src/main/tools/linux-sandbox-pid1.cc:292: writable: /tmp
+1756132381.640620286: src/main/tools/linux-sandbox-pid1.cc:292: writable: /dev/shm
+1756132381.640801330: src/main/tools/linux-sandbox-pid1.cc:362: remount ro: /
+1756132381.640808580: src/main/tools/linux-sandbox-pid1.cc:362: remount ro: /dev
+1756132381.640814539: src/main/tools/linux-sandbox-pid1.cc:362: remount ro: /dev/pts
+1756132381.640821122: src/main/tools/linux-sandbox-pid1.cc:362: remount rw: /dev/shm
+1756132381.640826747: src/main/tools/linux-sandbox-pid1.cc:362: remount ro: /dev/hugepages
+1756132381.640832247: src/main/tools/linux-sandbox-pid1.cc:362: remount ro: /dev/mqueue
+1756132381.640834539: src/main/tools/linux-sandbox-pid1.cc:362: remount ro: /run
+1756132381.640836456: src/main/tools/linux-sandbox-pid1.cc:362: remount ro: /run/lock
+1756132381.640838247: src/main/tools/linux-sandbox-pid1.cc:362: remount ro: /run/snapd/ns
+1756132381.640840497: src/main/tools/linux-sandbox-pid1.cc:362: remount ro: /run/user/128
+1756132381.640842831: src/main/tools/linux-sandbox-pid1.cc:362: remount ro: /run/user/1000
+1756132381.640845289: src/main/tools/linux-sandbox-pid1.cc:362: remount ro: /run/user/1000/gvfs
+1756132381.640855123: src/main/tools/linux-sandbox-pid1.cc:362: remount ro: /run/user/1000/doc
+1756132381.640925457: src/main/tools/linux-sandbox-pid1.cc:362: remount ro: /sys
+1756132381.640960124: src/main/tools/linux-sandbox-pid1.cc:362: remount ro: /sys/kernel/security
+1756132381.640971583: src/main/tools/linux-sandbox-pid1.cc:362: remount ro: /sys/fs/cgroup
+1756132381.640974874: src/main/tools/linux-sandbox-pid1.cc:362: remount ro: /sys/fs/cgroup/unified
+1756132381.640977291: src/main/tools/linux-sandbox-pid1.cc:362: remount ro: /sys/fs/cgroup/systemd
+1756132381.640979333: src/main/tools/linux-sandbox-pid1.cc:362: remount ro: /sys/fs/cgroup/cpu,cpuacct
+1756132381.640981708: src/main/tools/linux-sandbox-pid1.cc:362: remount ro: /sys/fs/cgroup/blkio
+1756132381.640983749: src/main/tools/linux-sandbox-pid1.cc:362: remount ro: /sys/fs/cgroup/net_cls,net_prio
+1756132381.640985791: src/main/tools/linux-sandbox-pid1.cc:362: remount ro: /sys/fs/cgroup/perf_event
+1756132381.640987833: src/main/tools/linux-sandbox-pid1.cc:362: remount ro: /sys/fs/cgroup/cpuset
+1756132381.640989791: src/main/tools/linux-sandbox-pid1.cc:362: remount ro: /sys/fs/cgroup/memory
+1756132381.640991833: src/main/tools/linux-sandbox-pid1.cc:362: remount ro: /sys/fs/cgroup/hugetlb
+1756132381.640994250: src/main/tools/linux-sandbox-pid1.cc:362: remount ro: /sys/fs/cgroup/devices
+1756132381.641105001: src/main/tools/linux-sandbox-pid1.cc:362: remount ro: /sys/fs/cgroup/freezer
+1756132381.641109793: src/main/tools/linux-sandbox-pid1.cc:362: remount ro: /sys/fs/cgroup/pids
+1756132381.641111668: src/main/tools/linux-sandbox-pid1.cc:362: remount ro: /sys/fs/cgroup/rdma
+1756132381.641113793: src/main/tools/linux-sandbox-pid1.cc:362: remount ro: /sys/fs/pstore
+1756132381.641115960: src/main/tools/linux-sandbox-pid1.cc:362: remount ro: /sys/firmware/efi/efivars
+1756132381.641152127: src/main/tools/linux-sandbox-pid1.cc:362: remount ro: /sys/fs/bpf
+1756132381.641156335: src/main/tools/linux-sandbox-pid1.cc:362: remount ro: /sys/kernel/tracing
+1756132381.641167585: src/main/tools/linux-sandbox-pid1.cc:362: remount ro: /sys/kernel/debug
+1756132381.641208461: src/main/tools/linux-sandbox-pid1.cc:362: remount ro: /sys/fs/fuse/connections
+1756132381.641225544: src/main/tools/linux-sandbox-pid1.cc:362: remount ro: /sys/kernel/config
+1756132381.641237961: src/main/tools/linux-sandbox-pid1.cc:362: remount ro: /proc
+1756132381.641242045: src/main/tools/linux-sandbox-pid1.cc:362: remount ro: /proc/sys/fs/binfmt_misc
+1756132381.641282962: src/main/tools/linux-sandbox-pid1.cc:382: remount(nullptr, /proc/sys/fs/binfmt_misc, nullptr, 2101281, nullptr) failure (Operation not permitted) ignored
+1756132381.641291879: src/main/tools/linux-sandbox-pid1.cc:362: remount ro: /proc/sys/fs/binfmt_misc
+1756132381.641330004: src/main/tools/linux-sandbox-pid1.cc:362: remount ro: /snap/lxd/22761
+1756132381.641344921: src/main/tools/linux-sandbox-pid1.cc:362: remount ro: /snap/core20/1614
+1756132381.641347880: src/main/tools/linux-sandbox-pid1.cc:362: remount ro: /boot
+1756132381.641350213: src/main/tools/linux-sandbox-pid1.cc:362: remount ro: /boot/efi
+1756132381.641356963: src/main/tools/linux-sandbox-pid1.cc:362: remount ro: /snap/snapd/25205
+1756132381.641368088: src/main/tools/linux-sandbox-pid1.cc:362: remount ro: /snap/core20/2603
+1756132381.641370047: src/main/tools/linux-sandbox-pid1.cc:362: remount ro: /snap/lxd/32669
+1756132381.641372338: src/main/tools/linux-sandbox-pid1.cc:362: remount rw: /home/denxwan/.cache/bazel/_bazel_denxwan/ad284d56aa212fb95e17a889fbcf6cea/sandbox/linux-sandbox/2357/execroot/org_onosproject_onos
+1756132381.641375463: src/main/tools/linux-sandbox-pid1.cc:362: remount rw: /home/denxwan/.cache/bazel/_bazel_denxwan/ad284d56aa212fb95e17a889fbcf6cea/sandbox/linux-sandbox/2357/execroot/org_onosproject_onos
+1756132381.641377422: src/main/tools/linux-sandbox-pid1.cc:362: remount rw: /tmp
+1756132381.641379130: src/main/tools/linux-sandbox-pid1.cc:362: remount rw: /dev/shm
+1756132381.641422631: src/main/tools/linux-sandbox-pid1.cc:451: calling fork...
+1756132381.641670509: src/main/tools/linux-sandbox-pid1.cc:481: child started with PID 2
+1756132451.671544212: src/main/tools/linux-sandbox-pid1.cc:498: wait returned pid=2, status=0x100
+1756132451.788394051: src/main/tools/linux-sandbox-pid1.cc:516: child exited normally with code 1
+1756132451.803299462: src/main/tools/linux-sandbox.cc:233: child exited normally with code 1
+Target //web/gui:onos-web-gui failed to build
+ERROR: /home/denxwan/onos/web/gui/BUILD:241:8 Executing genrule //web/gui:onos-web-gui failed: (Exit 1): linux-sandbox failed: error executing command 
+  (cd /home/denxwan/.cache/bazel/_bazel_denxwan/ad284d56aa212fb95e17a889fbcf6cea/sandbox/linux-sandbox/2357/execroot/org_onosproject_onos && \
+  exec env - \
+    PATH=/bin:/usr/bin:/usr/local/bin \
+    TMPDIR=/tmp \
+  /home/denxwan/.cache/bazel/_bazel_denxwan/install/5620740890d29896918ae35106336adb/linux-sandbox -t 15 -w /home/denxwan/.cache/bazel/_bazel_denxwan/ad284d56aa212fb95e17a889fbcf6cea/sandbox/linux-sandbox/2357/execroot/org_onosproject_onos -w /tmp -w /dev/shm -D -- /bin/bash -c 'source external/bazel_tools/tools/genrule/genrule-setup.sh; echo '\''if [[ "external/remotejdk11_linux_aarch64" = /* ]]; then JHOME=external/remotejdk11_linux_aarch64; else JHOME=$PWD/external/remotejdk11_linux_aarch64; fi'\'' > jdk_genrule_setup.sh; echo '\''export PATH=$JHOME/bin:$PATH:'\'' >> jdk_genrule_setup.sh; source jdk_genrule_setup.sh;  ROOT=`pwd` && export HOME=. && export XDG_CONFIG_HOME=bazel-out/aarch64-fastbuild/bin/web/gui/config && export BABEL_DISABLE_CACHE=1 && if [[ ! -z ${HTTP_PROXY-} ]]; then NPM_ARGS="--proxy $HTTP_PROXY --without-ssl --insecure"; else NPM_ARGS=""; fi && NPM=$ROOT/external/nodejs_linux_arm64/bin/npm && mkdir -p tools/gui && cd tools/gui && jar xf ../../bazel-out/aarch64-fastbuild/bin/tools/gui/tools-gui-gulp.jar && $NPM $NPM_ARGS install  --no-cache --loglevel=error > $ROOT/bazel-out/aarch64-fastbuild/bin/web/gui/onos-gui1-npm-install.log 2>&1 && find . -name package.json | while read pjson; do egrep -v '\''/execroot/'\'' $pjson > ptmp; mv ptmp $pjson; done && find package.json gulpfile.babel.js node_modules gulp-tasks -type f -exec touch -t 202101010000 {} \; && jar Mcf $ROOT/bazel-out/aarch64-fastbuild/bin/web/gui/onos-gui-npm-install.jar package.json gulpfile.babel.js node_modules gulp-tasks && touch $ROOT/bazel-out/aarch64-fastbuild/bin/web/gui/onos-gui1-npm-install.log')
+INFO: Elapsed time: 124.566s, Critical Path: 88.95s
+INFO: 2 processes: 2 internal.
+FAILED: Build did NOT complete successfully
