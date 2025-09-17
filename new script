@@ -1,0 +1,15 @@
+[Unit]
+Description=Open vSwitch
+After=network.target
+
+[Service]
+Type=forking
+ExecStart=/usr/local/bin/ovsdb-server --remote=punix:/usr/local/var/run/openvswitch/db.sock \
+                                       --remote=db:Open_vSwitch,Open_vSwitch,manager_options \
+                                       --pidfile --detach
+ExecStartPost=/usr/local/bin/ovs-vswitchd --pidfile --detach
+ExecStop=/usr/local/bin/ovs-vsctl --no-wait exit
+Restart=on-failure
+
+[Install]
+WantedBy=multi-user.target
