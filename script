@@ -1,0 +1,54 @@
+#!/bin/bash
+set -e
+
+echo "=== Step 1: Remove broken OVS packages ==="
+systemctl stop openvswitch-switch || true
+apt purge -y openvswitch-switch openvswitch-common || true
+apt autoremove -y
+rm -rf /etc/openvswitch
+
+echo "=== Step 2: Install build dependencies ==="
+apt update
+apt install -y git build-essential fakeroot debhelper autoconf automake libtool \
+    bzip2 libssl-dev python3 python3-pip python3-dev graphviz python3-sphinx \
+    libunbound-dev pkg-config wget
+
+echo "=== Step 3: Build modern OVS from source ==="
+cd /tmp
+git clone https://github.com/openvswitch/ovs.git
+cd ovs
+./boot.sh
+./configure --prefix=/usr/local --without-openssl
+make -j$(nproc)
+make install
+
+echo "=== Step 4: Initialize OVS database ==="
+mkdir -p /etc/openvswitch
+ovsdb-tool create /etc/openvswitch/conf.db /usr/local/share/openvswitch/vswitch.ovsschema
+
+echo "Starting ovsdb-server..."
+/usr/local/bin/ovsdb-server --remote=punix:/usr/local/var/run/openvswitch/db.sock \
+    --remote=db:Open_vSwitch,Open_vSwitch,manager_options \
+    --pidfile --detach
+
+echo "Starting ovs-vswitchd..."
+/usr/local/bin/ovs-vswitchd --pidfile --detach
+
+echo "Verify ovs-vsctl..."
+/usr/local/bin/ovs-vsctl show
+
+echo "=== Step 5: Build legacy ovs-controller ==="
+cd /tmp
+wget https://www.openvswitch.org/releases/openvswitch-2.5.0.tar.gz
+tar -xvzf openvswitch-2.5.0.tar.gz
+cd openvswitch-2.5.0
+./boot.sh
+./configure --build=x86_64-pc-linux-gnu
+make -j$(nproc)
+cp utilities/ovs-controller /usr/local/bin/
+
+echo "Verify ovs-controller..."
+/usr/local/bin/ovs-controller --help
+
+echo "=== Step 6: Done! ==="
+echo "You can now run Mininet with: sudo mn --controller=ovsc --switch=ovs,protocols=OpenFlow13"
